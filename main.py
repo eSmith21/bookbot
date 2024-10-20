@@ -24,8 +24,9 @@ def main():
     print(f"Word count: {word_count}")
 
     char_count = count_characters(file_contents)
-    print(f"Character count: {char_count}")
-
+    sorted_chars = sorted(char_count.items(), key=lambda x: x[1], reverse=True)
+    for char_count in sorted_chars:
+        print(f"{char_count[0]}: {char_count[1]}")
 
 if __name__ == "__main__":
     main()
