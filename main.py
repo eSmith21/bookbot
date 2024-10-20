@@ -14,19 +14,30 @@ def count_characters(text):
     return char_count
 
 
-
 def main():
     with open("books/frankenstein.txt") as f:
         file_contents = f.read()
     #print(file_contents)
 
-    word_count= count_words(file_contents)
-    print(f"Word count: {word_count}")
+    word_count = count_words(file_contents)
+    char_count_dict = count_characters(file_contents)
 
-    char_count = count_characters(file_contents)
-    sorted_chars = sorted(char_count.items(), key=lambda x: x[1], reverse=True)
-    for char_count in sorted_chars:
-        print(f"{char_count[0]}: {char_count[1]}")
+    print(f"--- Begin report of books/frankenstein.txt ---")
+    print(f"{word_count} words found in the document\n")
+
+    char_list = []
+    for char, count in char_count_dict.items():
+        char_list.append({"char": char, "num": count})
+
+    char_list.sort(key=lambda x: x["num"], reverse=True)
+
+    for char_dict in char_list:
+        print(f"The '{char_dict['char']}' character was found {char_dict['num']} times")
+
+    print(f"--- End report ---")
+
+#char_count = count_characters(file_contents)
+    #sorted_chars = sorted(char_count.items(), key=lambda x: x[1], reverse=True)
 
 if __name__ == "__main__":
     main()
